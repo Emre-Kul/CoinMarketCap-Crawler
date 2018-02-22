@@ -83,12 +83,6 @@ class cspider:#static class
 
 	def run():
 		coins = cspider.get_all_coins()[0:COIN_GRAPH_COUNT]
-		'''
-		for coin in coins:
-			coin.update( {'graph' : cspider.get_coin_graph(coin['url']) })
-			time.sleep(SLEEP_TIME_BETWEEN_REQUESTS)
-		json_coins = json.dumps(coins)
-		'''
 		json_coins = json.dumps(coins,indent=2)
 		cspider.save_data_to_file(json_coins,SAVE_FOLDER,"coins")
 		count = 1
@@ -99,5 +93,5 @@ class cspider:#static class
 			count += 1
 			time.sleep(SLEEP_TIME_BETWEEN_REQUESTS)
 		print("All Coins Saved")
-
-cspider.run();
+if __name__ == "__main__":
+	cspider.run();
