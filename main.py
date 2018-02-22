@@ -1,6 +1,8 @@
 import os,requests,json,time
 from bs4 import BeautifulSoup
 
+MAIN_URL = "https://coinmarketcap.com/all/views/all/"
+GRAPH_URL = "https://graphs2.coinmarketcap.com"
 COIN_GRAPH_COUNT = 10
 SAVE_FOLDER = "coin-data/"
 SLEEP_TIME_BETWEEN_REQUESTS = 1
@@ -9,7 +11,7 @@ PROXIES = {
 	'https' : 'x:x'	
 }
 
-class cspider:#static class
+class cspider:
 	def create_folder(folder_name):
 		os.makedirs(folder_name)
 
@@ -37,19 +39,16 @@ class cspider:#static class
 		except requests.exceptions.HTTPError as e:
 			if 'Retry-After' in req.headers :#sometimes this returns Date i should control it too
 				exit("Banned, Try Again After " + str( int(int(req.headers['Retry-After'])/60) ) + " Minutes")
-			#print(req.headers)
 			exit(e)
 		return req
 	
 	def get_coin_graph(coin_url):
-		URL = "https://graphs2.coinmarketcap.com"+coin_url
-		page = cspider.get_page(URL)
+		page = cspider.get_page(GRAPH_URL+coin_url)
 		json_data = json.loads(page.text)
 		return json_data['price_usd']
 
 	def get_all_coins():
-		URL = "https://coinmarketcap.com/all/views/all/"
-		page = cspider.get_page(URL)
+		page = cspider.get_page(MAIN_URL)
 		soup = BeautifulSoup(page.text,"html.parser")
 		table = soup.find('tbody')
 		coins = []
