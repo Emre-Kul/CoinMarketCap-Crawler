@@ -1,0 +1,11 @@
+{
+    "MAIN_URL" : "https://coinmarketcap.com/all/views/all/",
+    "GRAPH_URL": "https://graphs2.coinmarketcap.com",
+    "COIN_GRAPH_COUNT": 10,
+    "SAVE_FOLDER": "coin-data/",
+    "SLEEP_BETWEEN_REQUESTS_SECOND": 1,
+    "PROXIE_ON": "False",
+    "PROXIES" : {
+	    "https" : "x:x"	
+    }
+}
