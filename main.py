@@ -62,19 +62,19 @@ class cspider:
 			coin['price'] = tr.find('a',class_='price').get('data-usd')
 			coin['volume'] = tr.find('a',class_='volume').get('data-usd')
 			try :
-				coin['supply'] = tr.find('td',class_='circulating-supply').find('a').get('data-supply')
+				coin['supply'] = tr.find('td',class_='circulating-supply').find('span').get('data-supply')
 			except : 
 				coin['suuply'] = "None"
 			try :
-				coin['change-24h'] = tr.find('td',class_='percent-24h').get('data-usd')
+				coin['change-24h'] = tr.find('td',{'data-timespan': '24h'}).text.strip()
 			except:
 				coin['change-24h'] = "None"
 			try :
-				coin['change-1h'] = tr.find('td',class_='percent-1h').get('data-usd')
+				coin['change-1h'] = tr.find('td',{'data-timespan': '1h'}).text.strip()
 			except:
 				coin['change-1h'] = "None"
 			try :
-				coin['change-7d'] = tr.find('td',class_='percent-7d').get('data-usd')
+				coin['change-7d'] = tr.find('td',{'data-timespan': '7d'}).text.strip()
 			except:
 				coin['change-7d'] = "None"	
 			coins.append(coin)
